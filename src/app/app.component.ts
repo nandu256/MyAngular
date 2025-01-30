@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { HomeComponent } from './home/home.component';
+import { ParentComponent } from './parent/parent.component';
+import { ChildComponent } from './child/child.component';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
