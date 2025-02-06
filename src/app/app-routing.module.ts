@@ -8,6 +8,7 @@ import { SignupComponent } from './signup/signup.component';
 
 
 const routes: Routes = [
+  { path: '', component: HomeComponent,  }, 
   {path: 'home', component:HomeComponent },
   { path: 'Parent', component: ParentComponent},
   { path: 'Child', component:ChildComponent},

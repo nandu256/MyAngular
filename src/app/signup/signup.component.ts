@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,23 +10,32 @@ import { Router } from '@angular/router';
   styleUrl: './signup.component.css'
 })
 export class SignupComponent {
+  signupForm: FormGroup;
   
   fullName: string = '';
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.signupForm = this.fb.group({
+      fullName: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+  get f() {
+    return this.signupForm.controls; 
+  }
 
   onSignup() {
-    console.log('Full Name:', this.fullName);
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-
-    if (this.fullName && this.email && this.password) {
+    if (this.signupForm.valid) {
+      console.log('Full Name:', this.signupForm.value.fullName);
+      console.log('Email:', this.signupForm.value.email);
+      console.log('Password:', this.signupForm.value.password);
       alert('Signup successful! Please log in.');
-      this.router.navigate(['/login']); // Redirect to Login Page
+      this.router.navigate(['/login']);
     } else {
-      alert('Please fill in all fields.');
+      alert('Please fill in all fields correctly.');
     }
   }
 
